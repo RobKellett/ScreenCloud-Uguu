@@ -59,7 +59,7 @@ class UguuUploader():
         files = {"file": open(tmpFilename, "rb")} 
         
         try:
-            response = requests.post("http://uguu.se/api.php?d=upload", data=data, files=files)
+            response = requests.post("http://uguu.se/api.php?d=upload-tool", data=data, files=files)
             response.raise_for_status()
             if self.copyLink:
                 ScreenCloud.setUrl(response.text)
