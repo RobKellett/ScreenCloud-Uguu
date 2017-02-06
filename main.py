@@ -1,6 +1,6 @@
 import ScreenCloud
-from PythonQt.QtCore import QFile, QSettings
-from PythonQt.QtGui import QDesktopServices, QMessageBox
+from PythonQt.QtCore import QFile, QSettings, QStandardPaths
+from PythonQt.QtGui import QMessageBox
 from PythonQt.QtUiTools import QUiLoader
 import time, requests
 
@@ -53,7 +53,7 @@ class UguuUploader():
 
     def upload(self, screenshot, name):
         self.loadSettings()
-        tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + ScreenCloud.formatFilename(str(time.time()))
+        tmpFilename = QStandardPaths.writableLocation(QStandardPaths.TempLocation) + "/" + ScreenCloud.formatFilename(str(time.time()))
         screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
         data = {"name": name}
         files = {"file": open(tmpFilename, "rb")} 
